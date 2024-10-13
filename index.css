@@ -18,7 +18,7 @@ body {
 td {
 	width: 50px;
 	height: 50px;
-	background-color: #26262600;
+	background-color: transparent;
 	background-size: 80%;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
