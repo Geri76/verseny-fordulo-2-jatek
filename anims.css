@@ -1,0 +1,9 @@
+@keyframes jump {
+	50% {
+		background-size: 100%;
+	}
+	0%,
+	100% {
+		background-size: 80%;
+	}
+}
