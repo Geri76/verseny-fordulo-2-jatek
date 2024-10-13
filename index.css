@@ -26,7 +26,6 @@ td {
 }
 
 #game-area {
-	border: 3px solid #ffff00;
 	border-spacing: 0px;
 	background-image: url("assets/images/background.png");
 	background-size: 10%;
