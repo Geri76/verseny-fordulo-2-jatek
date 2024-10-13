@@ -8,6 +8,13 @@ class Coordinate {
 	}
 }
 
+const ZoneType = Object.freeze({
+	EMPTY: Symbol("empty"),
+	PLAYER: Symbol("player"),
+	POINT: Symbol("point"),
+	OBSTACLE: Symbol("obstacle"),
+});
+
 function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
