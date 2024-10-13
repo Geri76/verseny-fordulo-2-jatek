@@ -28,6 +28,36 @@ class Zone extends Coordinate {
 	}
 }
 
+class GameArea extends Coordinate {
+	area;
+
+	constructor(id) {
+		super();
+		this.area = document.getElementById(id);
+	}
+
+	setSize(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	generateGrid() {
+		for (let i = 0; i < this.x; i++) {
+			let row = document.createElement("tr");
+
+			for (let j = 0; j < this.y; j++) {
+				let col = document.createElement("td");
+				col.id = j + "-" + i;
+				col.classList.add("zone");
+
+				row.append(col);
+			}
+
+			this.area.append(row);
+		}
+	}
+}
+
 class Player extends Coordinate {
 	#points;
 
