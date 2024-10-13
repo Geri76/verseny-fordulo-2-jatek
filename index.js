@@ -14,7 +14,7 @@ function randomNumber(min, max) {
 
 const gameArea = new GameArea("game-area");
 
-let player = new Player();
+let player = new Player(gameArea);
 
 window.addEventListener("load", function () {
 	gameArea.setSize(10, 10);

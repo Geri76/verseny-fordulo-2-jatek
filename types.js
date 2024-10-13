@@ -42,10 +42,12 @@ class GameArea extends Coordinate {
 	}
 
 	generateGrid() {
-		for (let i = 0; i < this.x; i++) {
+		this.area.innerHTML = "";
+
+		for (let i = 0; i < this.y; i++) {
 			let row = document.createElement("tr");
 
-			for (let j = 0; j < this.y; j++) {
+			for (let j = 0; j < this.x; j++) {
 				let col = document.createElement("td");
 				col.id = j + "-" + i;
 				col.classList.add("zone");
@@ -60,13 +62,15 @@ class GameArea extends Coordinate {
 
 class Player extends Coordinate {
 	#points;
+	#gameArea;
 
-	constructor() {
+	constructor(gameArea) {
 		super();
 
 		this.x = 0;
 		this.y = 0;
-		this.point = 0;
+		this.#points = 0;
+		this.#gameArea = gameArea;
 	}
 
 	movePlayerTo(x, y) {
@@ -95,7 +99,7 @@ class Player extends Coordinate {
 	}
 
 	moveDown() {
-		if (this.y < 9) this.y++;
+		if (this.y < this.#gameArea.y - 1) this.y++;
 		this.movePlayerTo(this.x, this.y);
 	}
 
@@ -105,7 +109,7 @@ class Player extends Coordinate {
 	}
 
 	moveRight() {
-		if (this.x < 9) this.x++;
+		if (this.x < this.#gameArea.x - 1) this.x++;
 		this.movePlayerTo(this.x, this.y);
 	}
 }
