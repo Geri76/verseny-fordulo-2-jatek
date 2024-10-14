@@ -10,9 +10,10 @@ window.addEventListener("load", function () {
 	gameArea.setSize(10, 10);
 	gameArea.generateGrid();
 
-	player.movePlayerTo(randomNumber(0, 9), randomNumber(0, 9));
+	gameArea.setSeed("hello");
+	gameArea.generateMap();
 
-	gameArea.generateMap("hello");
+	player.movePlayerTo(0, 0);
 });
 
 window.addEventListener("keydown", (e) => {

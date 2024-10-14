@@ -28,6 +28,14 @@ class Zone extends Coordinate {
 		this.#zone = document.getElementById(x + "-" + y);
 	}
 
+	setContent(content) {
+		this.#zone.innerHTML = content;
+	}
+
+	getContent() {
+		return this.#zone.innerHTML;
+	}
+
 	getType() {
 		switch (this.#zone.style.backgroundImage) {
 			case "url('./assets/images/player.png')":
@@ -56,6 +64,7 @@ class Zone extends Coordinate {
 
 class GameArea extends Coordinate {
 	area;
+	#seed;
 
 	constructor(id) {
 		super();
@@ -65,6 +74,10 @@ class GameArea extends Coordinate {
 	setSize(x, y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	setSeed(seed) {
+		this.#seed = seed;
 	}
 
 	generateGrid() {
@@ -85,16 +98,20 @@ class GameArea extends Coordinate {
 		}
 	}
 
-	generateMap(seed) {
-		var myrng = new Math.seedrandom(seed);
+	generateMap() {
+		for (let i = 0; i < this.x; i++) {
+			for (let j = 0; j < this.y; j++) {
+				new Zone(i, j).setType(ZoneType.EMPTY);
+			}
+		}
+
+		var myrng = new Math.seedrandom(this.#seed);
 
 		for (let i = 0; i < 5; i++) {
 			let min = 2;
 			let max = 8;
 
-			new Zone(randomNumber(1, 5), randomNumber(1, 5)).setType(ZoneType.POINT);
-
-			let pointAmount = Math.floor(myrng.quick() * (max + 1 - min)) + min;
+			new Zone(Math.floor(myrng.quick() * (9 + 1 - 0)) + 0, Math.floor(myrng.quick() * (9 + 1 - 0)) + 0).setType(ZoneType.POINT);
 		}
 	}
 }
