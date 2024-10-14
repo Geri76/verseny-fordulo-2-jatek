@@ -11,6 +11,8 @@ window.addEventListener("load", function () {
 	gameArea.generateGrid();
 
 	player.movePlayerTo(randomNumber(0, 9), randomNumber(0, 9));
+
+	gameArea.generateMap("hello");
 });
 
 window.addEventListener("keydown", (e) => {

@@ -29,7 +29,12 @@ class Zone extends Coordinate {
 	}
 
 	getType() {
-		if (this.#zone.style.backgroundImage == "url('./assets/images/player.png')") return ZoneType.PLAYER;
+		switch (this.#zone.style.backgroundImage) {
+			case "url('./assets/images/player.png')":
+				return ZoneType.PLAYER;
+			case "url('./assets/images/coin.png')":
+				return ZoneType.POINT;
+		}
 	}
 
 	setType(type) {
@@ -37,6 +42,13 @@ class Zone extends Coordinate {
 			case ZoneType.PLAYER:
 				this.#zone.style.backgroundImage = "url('./assets/images/player.png')";
 				this.#zone.style.animation = "jump 0.2s";
+				break;
+			case ZoneType.POINT:
+				this.#zone.style.backgroundImage = "url('./assets/images/coin.png')";
+				break;
+			case ZoneType.EMPTY:
+				this.#zone.style.backgroundImage = "none";
+				this.#zone.style.animation = "";
 				break;
 		}
 	}
@@ -72,6 +84,19 @@ class GameArea extends Coordinate {
 			this.area.append(row);
 		}
 	}
+
+	generateMap(seed) {
+		var myrng = new Math.seedrandom(seed);
+
+		for (let i = 0; i < 5; i++) {
+			let min = 2;
+			let max = 8;
+
+			new Zone(randomNumber(1, 5), randomNumber(1, 5)).setType(ZoneType.POINT);
+
+			let pointAmount = Math.floor(myrng.quick() * (max + 1 - min)) + min;
+		}
+	}
 }
 
 class Player extends Coordinate {
@@ -89,12 +114,7 @@ class Player extends Coordinate {
 
 	movePlayerTo(x, y) {
 		if (new Zone(x, y).getType() != ZoneType.OBSTACLE) {
-			const zones = document.getElementsByClassName("zone");
-
-			for (let i = 0; i < zones.length; i++) {
-				zones[i].style.backgroundImage = "";
-				zones[i].style.animation = "";
-			}
+			new Zone(this.x, this.y).setType(ZoneType.EMPTY);
 
 			new Zone(x, y).setType(ZoneType.PLAYER);
 
@@ -104,22 +124,18 @@ class Player extends Coordinate {
 	}
 
 	moveUp() {
-		if (this.y > 0) this.y--;
-		this.movePlayerTo(this.x, this.y);
+		if (this.y > 0) this.movePlayerTo(this.x, this.y - 1);
 	}
 
 	moveDown() {
-		if (this.y < this.#gameArea.y - 1) this.y++;
-		this.movePlayerTo(this.x, this.y);
+		if (this.y < this.#gameArea.y - 1) this.movePlayerTo(this.x, this.y + 1);
 	}
 
 	moveLeft() {
-		if (this.x > 0) this.x--;
-		this.movePlayerTo(this.x, this.y);
+		if (this.x > 0) this.movePlayerTo(this.x - 1, this.y);
 	}
 
 	moveRight() {
-		if (this.x < this.#gameArea.x - 1) this.x++;
-		this.movePlayerTo(this.x, this.y);
+		if (this.x < this.#gameArea.x - 1) this.movePlayerTo(this.x + 1, this.y);
 	}
 }
