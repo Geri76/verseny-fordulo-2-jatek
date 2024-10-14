@@ -1,13 +1,3 @@
-function getZone(x, y) {
-	const zone = document.getElementById(x + "-" + y);
-
-	if (zone.style.backgroundImage == "url('./assets/images/player.png')") {
-		return new Zone(x, y, ZoneType.PLAYER);
-	} else {
-		return new Zone(x, y, ZoneType.OTHER);
-	}
-}
-
 function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max + 1 - min)) + min;
 }

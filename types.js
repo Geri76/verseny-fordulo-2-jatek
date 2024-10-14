@@ -17,14 +17,28 @@ class Coordinate {
 }
 
 class Zone extends Coordinate {
-	type;
+	#zone;
 
-	constructor(x, y, type) {
+	constructor(x, y) {
 		super();
 
 		this.x = x;
 		this.y = y;
-		this.type = type;
+
+		this.#zone = document.getElementById(x + "-" + y);
+	}
+
+	getType() {
+		if (this.#zone.style.backgroundImage == "url('./assets/images/player.png')") return ZoneType.PLAYER;
+	}
+
+	setType(type) {
+		switch (type) {
+			case ZoneType.PLAYER:
+				this.#zone.style.backgroundImage = "url('./assets/images/player.png')";
+				this.#zone.style.animation = "jump 0.2s";
+				break;
+		}
 	}
 }
 
@@ -74,9 +88,7 @@ class Player extends Coordinate {
 	}
 
 	movePlayerTo(x, y) {
-		let zone = getZone(x, y);
-
-		if (zone.type != ZoneType.OBSTACLE) {
+		if (new Zone(x, y).getType() != ZoneType.OBSTACLE) {
 			const zones = document.getElementsByClassName("zone");
 
 			for (let i = 0; i < zones.length; i++) {
@@ -84,9 +96,7 @@ class Player extends Coordinate {
 				zones[i].style.animation = "";
 			}
 
-			const zone = document.getElementById(x + "-" + y);
-			zone.style.backgroundImage = "url('./assets/images/player.png')";
-			zone.style.animation = "jump 0.2s";
+			new Zone(x, y).setType(ZoneType.PLAYER);
 
 			this.x = x;
 			this.y = y;
