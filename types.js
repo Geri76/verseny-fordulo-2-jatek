@@ -117,7 +117,7 @@ class GameArea extends Coordinate {
 }
 
 class Player extends Coordinate {
-	#points;
+	points;
 	#gameArea;
 
 	constructor(gameArea) {
@@ -125,7 +125,7 @@ class Player extends Coordinate {
 
 		this.x = 0;
 		this.y = 0;
-		this.#points = 0;
+		this.points = 0;
 		this.#gameArea = gameArea;
 	}
 
