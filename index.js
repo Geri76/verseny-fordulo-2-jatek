@@ -28,15 +28,19 @@ window.addEventListener("load", function () {
 window.addEventListener("keydown", (e) => {
 	switch (e.code) {
 		case "ArrowUp":
+		case "KeyW":
 			player.moveUp();
 			break;
 		case "ArrowDown":
+		case "KeyS":
 			player.moveDown();
 			break;
 		case "ArrowLeft":
+		case "KeyA":
 			player.moveLeft();
 			break;
 		case "ArrowRight":
+		case "KeyD":
 			player.moveRight();
 			break;
 	}

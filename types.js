@@ -30,6 +30,13 @@ class Stats {
 	}
 }
 
+class Guide {
+	static showArrows() {
+		document.getElementById("guide-image").style.visibility = "visible";
+		document.getElementById("guide-text").innerText = "Használd a nyilakat / WASD-t a mozgáshoz.";
+	}
+}
+
 class Zone extends Coordinate {
 	#zone;
 
@@ -56,7 +63,7 @@ class Zone extends Coordinate {
 			return ZoneType.PLAYER;
 		}
 
-		if (this.#zone.style.backgroundColor == "rgba(17, 17, 17, 0.667)") {
+		if (this.#zone.style.backgroundColor == "rgba(17, 17, 17, 0.45)") {
 			return ZoneType.POINT;
 		}
 	}
@@ -71,7 +78,7 @@ class Zone extends Coordinate {
 				break;
 			case ZoneType.POINT:
 				this.#zone.style.backgroundImage = "none";
-				this.#zone.style.backgroundColor = "#111111aa";
+				this.#zone.style.backgroundColor = "rgba(17, 17, 17, 0.45)";
 				break;
 			case ZoneType.EMPTY:
 				this.#zone.style.backgroundColor = "transparent";
@@ -116,6 +123,8 @@ class GameArea extends Coordinate {
 
 				col.addEventListener("click", (e) => {
 					if (!player.chosenStartCoordinate) {
+						Guide.showArrows();
+
 						player.movePlayerTo(parseInt(e.target.id.split("-")[0]), parseInt(e.target.id.split("-")[1]));
 						player.chosenStartCoordinate = !player.chosenStartCoordinate;
 					}
