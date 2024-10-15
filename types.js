@@ -38,27 +38,32 @@ class Zone extends Coordinate {
 	}
 
 	getType() {
-		switch (this.#zone.style.backgroundImage) {
-			case "url('./assets/images/player.png')":
-				return ZoneType.PLAYER;
-			case "url('./assets/images/coin.png')":
-				return ZoneType.POINT;
+		if (this.#zone.style.backgroundImage == "url('./assets/images/player.png')") {
+			return ZoneType.PLAYER;
+		}
+
+		if (this.#zone.style.backgroundColor == "rgba(17, 17, 17, 0.667)") {
+			return ZoneType.POINT;
 		}
 	}
 
 	setType(type) {
 		switch (type) {
 			case ZoneType.PLAYER:
+				this.#zone.style.backgroundColor = "transparent";
 				this.#zone.style.backgroundImage = "url('./assets/images/player.png')";
 				this.#zone.style.animation = "jump 0.2s";
+				this.setContent("");
 				break;
 			case ZoneType.POINT:
-				this.#zone.style.backgroundImage = "none)";
-				this.#zone.style.backgroundColor = "#11111111";
+				this.#zone.style.backgroundImage = "none";
+				this.#zone.style.backgroundColor = "#111111aa";
 				break;
 			case ZoneType.EMPTY:
+				this.#zone.style.backgroundColor = "transparent";
 				this.#zone.style.backgroundImage = "none";
 				this.#zone.style.animation = "";
+				this.setContent("");
 				break;
 		}
 
@@ -84,7 +89,7 @@ class GameArea extends Coordinate {
 		this.#seed = seed;
 	}
 
-	generateGrid() {
+	generateGrid(player) {
 		this.area.innerHTML = "";
 
 		for (let i = 0; i < this.y; i++) {
@@ -94,6 +99,13 @@ class GameArea extends Coordinate {
 				let col = document.createElement("td");
 				col.id = j + "-" + i;
 				col.classList.add("zone");
+
+				col.addEventListener("click", (e) => {
+					if (!player.chosenStartCoordinate) {
+						player.movePlayerTo(parseInt(e.target.id.split("-")[0]), parseInt(e.target.id.split("-")[1]));
+						player.chosenStartCoordinate = !player.chosenStartCoordinate;
+					}
+				});
 
 				row.append(col);
 			}
@@ -116,6 +128,7 @@ class GameArea extends Coordinate {
 class Player extends Coordinate {
 	points;
 	#gameArea;
+	chosenStartCoordinate;
 
 	constructor(gameArea) {
 		super();
@@ -124,11 +137,18 @@ class Player extends Coordinate {
 		this.y = 0;
 		this.points = 0;
 		this.#gameArea = gameArea;
+		this.chosenStartCoordinate = false;
 	}
 
 	movePlayerTo(x, y) {
 		if (new Zone(x, y).getType() != ZoneType.OBSTACLE) {
-			new Zone(this.x, this.y).setType(ZoneType.EMPTY);
+			if (this.chosenStartCoordinate) {
+				new Zone(this.x, this.y).setType(ZoneType.EMPTY);
+			}
+
+			if (new Zone(x, y).getType() == ZoneType.POINT) {
+				this.points += parseInt(new Zone(x, y).getContent());
+			}
 
 			new Zone(x, y).setType(ZoneType.PLAYER);
 
@@ -138,18 +158,18 @@ class Player extends Coordinate {
 	}
 
 	moveUp() {
-		if (this.y > 0) this.movePlayerTo(this.x, this.y - 1);
+		if (this.y > 0 && this.chosenStartCoordinate) this.movePlayerTo(this.x, this.y - 1);
 	}
 
 	moveDown() {
-		if (this.y < this.#gameArea.y - 1) this.movePlayerTo(this.x, this.y + 1);
+		if (this.y < this.#gameArea.y - 1 && this.chosenStartCoordinate) this.movePlayerTo(this.x, this.y + 1);
 	}
 
 	moveLeft() {
-		if (this.x > 0) this.movePlayerTo(this.x - 1, this.y);
+		if (this.x > 0 && this.chosenStartCoordinate) this.movePlayerTo(this.x - 1, this.y);
 	}
 
 	moveRight() {
-		if (this.x < this.#gameArea.x - 1) this.movePlayerTo(this.x + 1, this.y);
+		if (this.x < this.#gameArea.x - 1 && this.chosenStartCoordinate) this.movePlayerTo(this.x + 1, this.y);
 	}
 }

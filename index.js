@@ -8,12 +8,10 @@ let player = new Player(gameArea);
 
 window.addEventListener("load", function () {
 	gameArea.setSize(10, 10);
-	gameArea.generateGrid();
+	gameArea.generateGrid(player);
 
 	gameArea.setSeed("hello");
 	gameArea.generateMap();
-
-	player.movePlayerTo(0, 0);
 });
 
 window.addEventListener("keydown", (e) => {

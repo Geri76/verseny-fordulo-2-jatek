@@ -26,6 +26,12 @@ body {
 	text-align: center;
 	color: white;
 	font-size: 20px;
+	font-weight: bold;
+}
+
+.zone:hover {
+	cursor: pointer;
+	color: #8d77ca;
 }
 
 #game-area {
