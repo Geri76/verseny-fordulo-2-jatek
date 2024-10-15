@@ -24,6 +24,10 @@ class Stats {
 	static setPointsDisplay(points) {
 		document.getElementById("points").innerHTML = "Pontok: " + points;
 	}
+
+	static setSeedDisplay(seed) {
+		document.getElementById("seed").innerHTML = "Seed: " + seed;
+	}
 }
 
 class Zone extends Coordinate {
@@ -149,7 +153,7 @@ class Player extends Coordinate {
 		this.points = 0;
 		this.#gameArea = gameArea;
 		this.chosenStartCoordinate = false;
-		this.#steps = 10;
+		this.#steps = 11;
 	}
 
 	movePlayerTo(x, y) {
