@@ -30,6 +30,7 @@ class Zone extends Coordinate {
 
 	setContent(content) {
 		this.#zone.innerHTML = content;
+		return this;
 	}
 
 	getContent() {
@@ -52,13 +53,16 @@ class Zone extends Coordinate {
 				this.#zone.style.animation = "jump 0.2s";
 				break;
 			case ZoneType.POINT:
-				this.#zone.style.backgroundImage = "url('./assets/images/coin.png')";
+				this.#zone.style.backgroundImage = "none)";
+				this.#zone.style.backgroundColor = "#11111111";
 				break;
 			case ZoneType.EMPTY:
 				this.#zone.style.backgroundImage = "none";
 				this.#zone.style.animation = "";
 				break;
 		}
+
+		return this;
 	}
 }
 
@@ -99,19 +103,12 @@ class GameArea extends Coordinate {
 	}
 
 	generateMap() {
-		for (let i = 0; i < this.x; i++) {
-			for (let j = 0; j < this.y; j++) {
-				new Zone(i, j).setType(ZoneType.EMPTY);
-			}
-		}
-
 		var myrng = new Math.seedrandom(this.#seed);
 
-		for (let i = 0; i < 5; i++) {
-			let min = 2;
-			let max = 8;
-
-			new Zone(Math.floor(myrng.quick() * (9 + 1 - 0)) + 0, Math.floor(myrng.quick() * (9 + 1 - 0)) + 0).setType(ZoneType.POINT);
+		for (let i = 0; i < this.x; i++) {
+			for (let j = 0; j < this.y; j++) {
+				new Zone(i, j).setType(ZoneType.POINT).setContent(Math.floor(myrng.quick() * 7) + 2);
+			}
 		}
 	}
 }
