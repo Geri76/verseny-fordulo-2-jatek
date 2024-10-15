@@ -49,6 +49,7 @@ window.addEventListener("keydown", (e) => {
 document.getElementById("new-seed").addEventListener("click", () => {
 	const seed = randomNumber(10210, 17520);
 	this.localStorage.setItem("seed", seed);
+	this.localStorage.removeItem("top");
 
 	document.location.href = document.location.href;
 });
@@ -59,5 +60,7 @@ document.getElementById("restart").addEventListener("click", () => {
 
 document.getElementById("set-seed").addEventListener("click", () => {
 	this.localStorage.setItem("seed", document.getElementById("seed").value);
+	this.localStorage.removeItem("top");
+
 	document.location.href = document.location.href;
 });

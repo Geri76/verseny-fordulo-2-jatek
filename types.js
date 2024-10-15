@@ -22,7 +22,7 @@ class Stats {
 	}
 
 	static setPointsDisplay(points) {
-		document.getElementById("points").innerHTML = "Pontok: " + points;
+		document.getElementById("points").innerHTML = "Pontok: " + points + (localStorage.getItem("top") ? "/" + localStorage.getItem("top") : "");
 	}
 
 	static setSeedDisplay(seed) {
@@ -181,6 +181,10 @@ class Player extends Coordinate {
 			this.y = y;
 
 			this.#steps--;
+		}
+
+		if (this.#steps == 0 && (this.points > parseInt(localStorage.getItem("top")) || localStorage.getItem("top") == null)) {
+			localStorage.setItem("top", this.points);
 		}
 
 		Stats.setPointsDisplay(this.points);
