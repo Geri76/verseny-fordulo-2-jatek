@@ -33,11 +33,12 @@ body {
 	background-image: url("assets/images/background.png");
 	background-size: 10%;
 	border: solid 10px #212134;
+	border-spacing: 5px;
 }
 
 #game-title {
-	font-size: 40px;
+	font-size: 30px;
 	position: fixed;
-	top: 50px;
+	top: 1dvh;
 	color: #ffff00;
 }
