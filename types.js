@@ -26,7 +26,7 @@ class Stats {
 	}
 
 	static setSeedDisplay(seed) {
-		document.getElementById("seed").innerHTML = "Seed: " + seed;
+		document.getElementById("seed").value = seed;
 	}
 }
 

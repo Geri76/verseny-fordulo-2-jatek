@@ -52,3 +52,8 @@ document.getElementById("new-seed").addEventListener("click", () => {
 document.getElementById("restart").addEventListener("click", () => {
 	document.location.href = document.location.href;
 });
+
+document.getElementById("set-seed").addEventListener("click", () => {
+	this.localStorage.setItem("seed", document.getElementById("seed").value);
+	document.location.href = document.location.href;
+});
