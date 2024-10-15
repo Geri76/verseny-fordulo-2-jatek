@@ -16,6 +16,16 @@ class Coordinate {
 	}
 }
 
+class Stats {
+	static setStepsDisplay(steps) {
+		document.getElementById("steps").innerHTML = "Lépések: " + steps;
+	}
+
+	static setPointsDisplay(points) {
+		document.getElementById("points").innerHTML = "Pontok: " + points;
+	}
+}
+
 class Zone extends Coordinate {
 	#zone;
 
@@ -129,6 +139,7 @@ class Player extends Coordinate {
 	points;
 	#gameArea;
 	chosenStartCoordinate;
+	#steps;
 
 	constructor(gameArea) {
 		super();
@@ -138,10 +149,11 @@ class Player extends Coordinate {
 		this.points = 0;
 		this.#gameArea = gameArea;
 		this.chosenStartCoordinate = false;
+		this.#steps = 10;
 	}
 
 	movePlayerTo(x, y) {
-		if (new Zone(x, y).getType() != ZoneType.OBSTACLE) {
+		if (new Zone(x, y).getType() != ZoneType.OBSTACLE && this.#steps > 0) {
 			if (this.chosenStartCoordinate) {
 				new Zone(this.x, this.y).setType(ZoneType.EMPTY);
 			}
@@ -154,7 +166,12 @@ class Player extends Coordinate {
 
 			this.x = x;
 			this.y = y;
+
+			this.#steps--;
 		}
+
+		Stats.setPointsDisplay(this.points);
+		Stats.setStepsDisplay(this.#steps);
 	}
 
 	moveUp() {
