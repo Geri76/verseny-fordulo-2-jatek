@@ -1,8 +1,15 @@
 @import url("anims.css");
 
+* {
+	font-family: "Pet Me";
+	outline: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
 body {
 	background-color: #111111;
-	font-family: "DotGothic16";
 	margin: 0;
 }
 
@@ -16,8 +23,8 @@ body {
 }
 
 .zone {
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
 	background-color: transparent;
 	background-size: 80%;
 	background-position: 50% 50%;
@@ -25,13 +32,13 @@ body {
 	image-rendering: pixelated;
 	text-align: center;
 	color: white;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
 }
 
 .zone:hover {
 	cursor: pointer;
-	color: #8d77ca;
+	color: yellow;
 }
 
 #game-area {
@@ -47,6 +54,34 @@ body {
 	color: yellow;
 	left: 50px;
 	position: fixed;
-	width: 200px;
+	width: fit-content;
 	height: 90%;
+	display: flex;
+	flex-direction: column;
+}
+
+#game-stats > * {
+	margin-bottom: 15px;
+}
+
+#game-stats > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#new-seed,
+#restart {
+	margin-top: 10px;
+	border: 3px yellow solid;
+	padding: 20px;
+	font-size: 20px;
+	background-color: black;
+	color: yellow;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: bold;
+	width: 250px;
+	margin-bottom: 10px;
 }
