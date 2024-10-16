@@ -32,8 +32,8 @@ img {
 }
 
 .zone {
-	width: 60px;
-	height: 60px;
+	width: 3dvw;
+	height: 3dvw;
 	background-color: transparent;
 	background-size: 80%;
 	background-position: 50% 50%;
