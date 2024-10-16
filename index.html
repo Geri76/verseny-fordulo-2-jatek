@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="hu">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/index.css" />
-		<title>Játék</title>
-	</head>
-	<body>
-		<div id="main">
-			<table id="game-area"></table>
-			<div id="game-stats">
-				<span id="steps">Lépések: 0</span>
-				<span id="points">Pontok: 0</span>
-				<span>Seed: <input id="seed" type="text" size="5" maxlength="5" /></span>
-				<button id="set-seed">Seed beállítása</button>
-				<button id="new-seed">Új seed</button>
-				<button id="restart">Újrakezdés</button>
-			</div>
-			<div id="guide">
-				<img id="guide-image" src="/assets/images/keys.gif" alt="Nyilak" />
-				<span id="guide-text">Válassz indulási helyet!</span>
-			</div>
-		</div>
-	</body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-	<script src="/types.js"></script>
-	<script src="/index.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/index.css" />
+        <title>Játék</title>
+    </head>
+    <body>
+        <div id="main">
+            <table id="game-area"></table>
+            <div id="game-stats">
+                <span id="steps">Lépések: 0</span>
+                <span id="points">Pontok: 0</span>
+                <span>Seed: <input id="seed" type="text" size="5" maxlength="5" /></span>
+                <button id="set-seed">Seed beállítása</button>
+                <button id="new-seed">Új seed</button>
+                <button id="restart">Újrakezdés</button>
+            </div>
+            <div id="special-abilities">
+                <span>Különleges<br />képességek</span>
+                <button class="abilitity" id="random-teleport">Random Teleport</button>
+            </div>
+            <div id="guide">
+                <img id="guide-image" src="/assets/images/keys.gif" alt="Nyilak" />
+                <span id="guide-text">Válassz indulási helyet!</span>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    <script src="/types.js"></script>
+    <script src="/index.js"></script>
 </html>
