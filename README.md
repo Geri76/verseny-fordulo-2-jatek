@@ -1,4 +1,4 @@
-# verseny-fordulo-2-jatek
+# [verseny-fordulo-2-jatek](https://geri76.github.io/verseny-fordulo-2-jatek/)
 https://files.mik.uni-pannon.hu/index.php/s/SpMozt7A6meq3RE
 
 > A weboldal megtekintéséhez webszerver szükséges.\
